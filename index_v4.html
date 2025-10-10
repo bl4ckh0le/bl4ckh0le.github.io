@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="ChatGPT" />
+    <meta name="description" content="Quantenrauschen – Erleben Sie das Rauschen der Quantenwelt zu Hause. Kurse, Experimente und mehr." />
+    <meta property="og:title" content="Quantenrauschen – Das Rauschen der Zukunft" />
+    <meta property="og:description" content="Erleben Sie Quantenrauschen mit uns – Kurse, Generator und mehr." />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="de_DE" />
+    <meta name="theme-color" content="#0a0a0a" />
+
+    <title>Quantenrauschen – Willkommen</title>
+
+    <style>
+      :root {
+        --font-body: system-ui, -apple-system, "Helvetica Neue", sans-serif;
+        --font-heading: "Helvetica Neue", sans-serif;
+        --color-bg: #fafafa;
+        --color-text: #111;
+        --color-accent: #2d7cff;
+        --color-muted: #666;
+        --transition: all 0.6s ease;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --color-bg: #050505;
+          --color-text: #f5f5f5;
+          --color-accent: #4da3ff;
+          --color-muted: #aaa;
+        }
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: var(--font-body);
+        background-color: var(--color-bg);
+        color: var(--color-text);
+        line-height: 1.7;
+        scroll-behavior: smooth;
+        position: relative;
+        overflow-x: hidden;
+      }
+
+      canvas#noise {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -2;
+        pointer-events: none;
+        opacity: 0.15;
+        mix-blend-mode: screen;
+        filter: blur(0.3px);
+      }
+
+      header {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        min-height: 100vh;
+        text-align: center;
+        position: relative;
+        background: radial-gradient(circle at 50% 50%, var(--color-accent) 0%, transparent 70%);
+        background-size: cover;
+        padding: 2rem;
+        animation: fadeIn 2s ease;
+      }
+
+      h1 {
+        font-family: var(--font-heading);
+        font-size: clamp(2rem, 6vw, 3rem);
+        margin-bottom: 0.5rem;
+      }
+
+      header p {
+        max-width: 600px;
+        color: var(--color-muted);
+        font-size: 1.1rem;
+      }
+
+      main {
+        display: grid;
+        gap: 3rem;
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 3rem 1.5rem;
+      }
+
+      section {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: var(--transition);
+      }
+
+      section.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      h2 {
+        font-size: 1.8rem;
+        color: var(--color-accent);
+        margin-bottom: 0.5rem;
+      }
+
+      a {
+        color: var(--color-accent);
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      a:hover {
+        color: #1b5bff;
+      }
+
+      pre {
+        text-align: center;
+        font-family: monospace;
+        margin-top: 3rem;
+      }
+
+      footer {
+        text-align: center;
+        padding: 2rem;
+        font-size: 0.9rem;
+        color: var(--color-muted);
+        border-top: 1px solid rgba(100, 100, 100, 0.2);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+    </style>
+  </head>
+
+  <body>
+    <canvas id="noise"></canvas>
+
+    <header>
+      <h1>Willkommen bei Quantenrauschen</h1>
+      <p>Erleben Sie das Rauschen der Quantenwelt – mit unserem Generator, spannenden Kursen und interaktiven Experimenten.</p>
+    </header>
+
+    <main>
+      <section>
+        <h2>Das Rauschen zu Hause erleben</h2>
+        <p>Mit unserem Quantenrauschen-Generator holen Sie die Magie der Quanten direkt in Ihr Wohnzimmer. Erleben Sie, wie sich theoretische Physik und Klang vereinen.</p>
+      </section>
+
+      <section>
+        <h2>Quantenrauschen-Kurse</h2>
+        <p>Lernen Sie in unseren Kursen, wie Quantenrauschen entsteht, was es über das Universum verrät und wie man es selbst erzeugen kann. Keine Vorkenntnisse nötig – nur Neugier.</p>
+      </section>
+
+      <section>
+        <h2>Kontakt & Community</h2>
+        <p>
+          Folgen Sie uns auf
+          <a rel="me" href="https://mastodon.social/@blackh0le">Mastodon</a>
+          oder schreiben Sie uns direkt. Wir helfen Ihnen gerne, Ihr persönliches Quanten-Erlebnis zu planen.
+        </p>
+      </section>
+
+      <pre>
+    /\_/\
+   ( o.o )
+    > ^ <
+      </pre>
+    </main>
+
+    <footer>
+      <p>© 2025 Quantenrauschen – Ein Projekt von ChatGPT</p>
+      <p>Gehostet mit GitHub Pages</p>
+    </footer>
+
+    <script>
+      // Scroll-Reveal Effekt
+      const sections = document.querySelectorAll("section");
+      const reveal = () => {
+        sections.forEach((section) => {
+          const rect = section.getBoundingClientRect();
+          if (rect.top < window.innerHeight * 0.8) {
+            section.classList.add("visible");
+          }
+        });
+      };
+      window.addEventListener("scroll", reveal);
+      reveal();
+
+      // Bläulicher Rauscheffekt mit Canvas
+      const canvas = document.getElementById("noise");
+      const ctx = canvas.getContext("2d");
+      let w, h, imageData, buffer;
+
+      function setup() {
+        w = canvas.width = window.innerWidth;
+        h = canvas.height = window.innerHeight;
+        imageData = ctx.createImageData(w, h);
+        buffer = imageData.data;
+      }
+
+      function noise() {
+        const len = buffer.length;
+        for (let i = 0; i < len; i += 4) {
+          const n = Math.random() * 255;
+          // leichte Farbverschiebung ins Cyan-Blaue
+          buffer[i] = n * 0.4;     // Rot
+          buffer[i + 1] = n * 0.8; // Grün
+          buffer[i + 2] = n;       // Blau
+          buffer[i + 3] = 255;     // Alpha
+        }
+        ctx.putImageData(imageData, 0, 0);
+      }
+
+      let frame = 0;
+      function loop() {
+        if (frame % 3 === 0) noise();
+        frame++;
+        requestAnimationFrame(loop);
+      }
+
+      setup();
+      loop();
+      window.addEventListener("resize", setup);
+    </script>
+  </body>
+</html>
