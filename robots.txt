@@ -1,2 +1,11 @@
 User-agent: *
-Disallow: /
+Allow: /
+
+Disallow: /assets/
+Disallow: /scripts/
+Disallow: /styles/
+Disallow: /tmp/
+Disallow: /private/
+
+Sitemap: https://quantenrasuchen.de/sitemap.xml
+Crawl-delay: 10
