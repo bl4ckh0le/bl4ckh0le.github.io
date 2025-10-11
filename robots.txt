@@ -1,11 +1,17 @@
+# robots.txt für eine moderne Landingpage
+# Stand: 2025-10-11
+
 User-agent: *
+# Crawling der gesamten Website erlauben
 Allow: /
 
-Disallow: /assets/
-Disallow: /scripts/
-Disallow: /styles/
-Disallow: /tmp/
+# Ausschluss sensibler/versteckter Verzeichnisse
+Disallow: /admin/
 Disallow: /private/
+Disallow: /tmp/
 
-Sitemap: https://quantenrasuchen.de/sitemap.xml
+# Crawl-Rate Empfehlungen
 Crawl-delay: 10
+
+# Sitemap zur besseren Indexierung angeben
+Sitemap: https://www.quantenrauschen.de/sitemap.xml
