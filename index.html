@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <!-- 🧠 SEO & Social Meta -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Erleben Sie Quantenrauschen – die harmonische Verbindung von Wissenschaft, Klang und Faszination.">
+  <meta name="keywords" content="Quantenrauschen, Quantenphysik, Wissenschaft, Klang, Rauschen, Generator, Kurse">
+  <meta name="author" content="ChatGPT">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Willkommen bei Quantenrauschen">
+  <meta property="og:description" content="Das ultimative Ziel für alle, die das Rauschen des Universums hören möchten.">
+  <meta property="og:url" content="https://deine-domain.tld/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="de_DE">
+  <meta property="og:image" content="https://deine-domain.tld/preview.jpg">
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Willkommen bei Quantenrauschen">
+  <meta name="twitter:description" content="Tauchen Sie ein in das kosmische Rauschen – Wissenschaft trifft Klang.">
+  <meta name="twitter:image" content="https://deine-domain.tld/preview.jpg">
+  <meta name="twitter:creator" content="@blackh0le">
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://deine-domain.tld/">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+  <!-- Strukturierte Daten -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Quantenrauschen",
+    "url": "https://deine-domain.tld/",
+    "description": "Erleben Sie Quantenrauschen – die harmonische Verbindung von Wissenschaft, Klang und Faszination.",
+    "author": {
+      "@type": "Person",
+      "name": "ChatGPT"
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": "Quantenrauschen",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://deine-domain.tld/logo.png"
+      }
+    },
+    "inLanguage": "de"
+  }
+  </script>
+
+  <title>Willkommen bei Quantenrauschen</title>
+
+  <style>
+    :root {
+      --text-color: #fff;
+      --bg-color: #000;
+      --accent-color: #0ff;
+      --overlay-opacity: 0.07;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      height: 100vh;
+      width: 100%;
+      font-family: "Inter", "Helvetica Neue", sans-serif;
+      color: var(--text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: var(--bg-color);
+      overflow: hidden;
+      text-align: center;
+    }
+
+    /* Rauscheffekt */
+    .noise {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      opacity: var(--overlay-opacity);
+      background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAAAwCAQAAACz4RYYAAAAG0lEQVR42u3OMQEAAAgDIN8/9HIHhQEAAAAAAAB4D7kAAR8w1uUAAAAASUVORK5CYII=');
+      animation: noiseMove 0.3s steps(4) infinite;
+      z-index: 1;
+    }
+
+    @keyframes noiseMove {
+      0% { transform: translate(0, 0); }
+      10% { transform: translate(-5%, -5%); }
+      20% { transform: translate(-10%, 5%); }
+      30% { transform: translate(5%, -10%); }
+      40% { transform: translate(-5%, 15%); }
+      50% { transform: translate(-10%, 5%); }
+      60% { transform: translate(15%, 0); }
+      70% { transform: translate(0, 10%); }
+      80% { transform: translate(-15%, 0); }
+      90% { transform: translate(10%, 5%); }
+      100% { transform: translate(5%, 0); }
+    }
+
+    main {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      padding: 2rem;
+      backdrop-filter: blur(10px) brightness(1.2);
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1rem;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.95); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: var(--accent-color);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      color: #0ff;
+    }
+
+    p {
+      line-height: 1.6;
+      margin: 1rem 0;
+      color: #ddd;
+    }
+
+    a {
+      color: var(--accent-color);
+      text-decoration: none;
+      border-bottom: 1px solid var(--accent-color);
+      transition: color 0.3s;
+    }
+
+    a:hover {
+      color: #fff;
+    }
+
+    pre {
+      margin-top: 2rem;
+      color: #0ff;
+    }
+
+    footer {
+      margin-top: 2rem;
+      font-size: 0.8rem;
+      opacity: 0.7;
+    }
+
+    @media (max-width: 600px) {
+      h1 { font-size: 2rem; }
+      main { padding: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <main>
+    <h1>Willkommen bei Quantenrauschen</h1>
+    <p>Das ultimative Ziel für alle, die das Rauschen des Universums hören möchten.</p>
+
+    <h2>Erleben Sie das Rauschen der Quanten</h2>
+    <p>Mit unserem Quantenrauschen-Generator bringen Sie das kosmische Flirren direkt in Ihr Wohnzimmer.</p>
+
+    <h2>Lernen Sie mehr über Quanten</h2>
+    <p>Unsere Kurse entführen Sie tief in die faszinierende Welt der Quantenphysik – praxisnah und inspirierend.</p>
+
+    <h2>Kontakt</h2>
+    <p><a href="https://mastodon.social/@blackh0le" rel="me">Folgen Sie uns auf Mastodon</a></p>
+
+    <pre>
+      /\_/\
+     ( o.o )
+      > ^ <
+    </pre>
+
+    <footer>
+      <p>[Prøduct øf ChatGPT] — {Høstəd with GitHub Pagəs}</p>
+    </footer>
+  </main>
+</body>
+</html>
