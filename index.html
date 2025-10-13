@@ -1,294 +1,231 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="de">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Willkommen bei Quantenrauschen</title>
-    <meta
-      name="description"
-      content="Erleben Sie Quantenrauschen – Kurse, Infos und ein interaktiver Generator für Quantenfrequenzen."
-    />
-    <meta name="author" content="Quantenrauschen" />
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Willkommen bei Quantenrauschen!</title>
+  <meta name="author" content="ChatGPT" />
+  <meta name="description" content="Quantenrauschen — Experimente, Generator & Kurse rund um Quantenrauschen." />
 
-    <!-- Open Graph -->
-    <meta property="og:title" content="Willkommen bei Quantenrauschen" />
-    <meta
-      property="og:description"
-      content="Tauchen Sie ein in die Welt des Quantenrauschens."
-    />
-    <meta property="og:image" content="preview.jpg" />
-    <meta property="og:type" content="website" />
-    <meta property="og:locale" content="de_DE" />
+  <!-- Open Graph / Social preview (put preview.jpg in your repository root) -->
+  <meta property="og:title" content="Willkommen bei Quantenrauschen!" />
+  <meta property="og:description" content="Erlebe Quantenrauschen zuhause — Generatoren, Kurse und mehr." />
+  <meta property="og:image" content="/preview.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
 
-    <link rel="icon" type="image/png" href="preview.jpg" />
+  <!-- Favicon (simple SVG data-uri) -->
+  <link rel="icon" href='data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64"><rect rx="12" width="64" height="64" fill="%2300192b"/><g fill="%2300e6ff" font-family="sans-serif" font-weight="700" font-size="34"><text x="8" y="44">Q</text></g></svg>'>
 
-    <style>
-      :root {
-        --accent: #29d9f7;
-        --bg: #0a0f17;
-        --text: #e0e0e0;
-      }
+  <style>
+    :root{
+      --bg:#041426; /* deep blue */
+      --accent:#00e6ff;
+      --muted:rgba(255,255,255,0.75);
+      --glass: rgba(255,255,255,0.03);
+      --max-width:1000px;
+    }
 
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-      }
+    /* make the noisey background using the attached preview.jpg as texture */
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: Inter, "Helvetica Neue", Arial, sans-serif;
+      background-color:var(--bg);
+      color: #e6f7ff;
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+      line-height:1.45;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:48px 20px;
+    }
 
-      body {
-        font-family: "Helvetica Neue", Arial, sans-serif;
-        background: var(--bg);
-        color: var(--text);
-        line-height: 1.6;
-        overflow-x: hidden;
-      }
+    /* layered background: preview.jpg (put the provided preview.jpg next to index.html) + subtle gradient + CSS grain */
+    .page{
+      width:100%;
+      max-width:var(--max-width);
+      background-image:
+        linear-gradient(rgba(2,8,18,0.6), rgba(2,8,18,0.6)),
+        url('/preview.jpg');
+      background-size:cover;
+      background-position:center center;
+      border-radius:18px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+      overflow:hidden;
+      position:relative;
+    }
 
-      /* 🔹 Hintergrund */
-      .background-noise {
-        position: fixed;
-        inset: 0;
-        background:
-          repeating-linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0.015) 0px,
-            rgba(255, 255, 255, 0.015) 1px,
-            transparent 1px,
-            transparent 3px
-          ),
-          radial-gradient(
-            circle at 50% 50%,
-            rgba(41, 217, 247, 0.07) 0%,
-            transparent 70%
-          ),
-          url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-        background-size: auto, cover, cover;
-        opacity: 0;
-        z-index: -1;
-        animation: noiseShift 8s linear infinite;
-        transition: opacity 1.5s ease, transform 0.5s ease-out;
-      }
+    /* subtle grain overlay using SVG as background-image data-uri to avoid extra files */
+    .page::after{
+      content:"";
+      position:absolute;inset:0;
+      pointer-events:none;
+      background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300"><filter id="a"><feTurbulence baseFrequency="0.9" numOctaves="1" stitchTiles="stitch"/></filter><rect width="100%" height="100%" filter="url(%23a)" opacity="0.03"/></svg>');
+      mix-blend-mode:overlay;
+    }
 
-      @keyframes noiseShift {
-        0% { background-position: 0 0, 0 0, 0 0; }
-        50% { background-position: 0 10px, 50px 30px, -20px -10px; }
-        100% { background-position: 0 0, 0 0, 0 0; }
-      }
+    header{
+      display:flex;
+      align-items:center;
+      gap:16px;
+      padding:28px 36px;
+    }
 
-      /* 🌟 Einschalt-Flash */
-      .flash-overlay {
-        position: fixed;
-        inset: 0;
-        background: radial-gradient(
-          circle at center,
-          rgba(41, 217, 247, 0.8) 0%,
-          rgba(41, 217, 247, 0.3) 40%,
-          rgba(10, 15, 23, 0) 80%
-        );
-        opacity: 0;
-        z-index: 100;
-        pointer-events: none;
-        animation: startFlash 2s ease-out;
-      }
+    .logo{
+      display:flex;align-items:center;gap:12px;
+    }
 
-      @keyframes startFlash {
-        0% { opacity: 0; }
-        10% { opacity: 1; }
-        50% { opacity: 0.4; }
-        100% { opacity: 0; }
-      }
+    /* Inline SVG wave logo container */
+    .logo svg{width:64px;height:64px;border-radius:12px;background:linear-gradient(180deg,#001226 0%,#021f34 100%);box-shadow:0 6px 18px rgba(2,20,30,0.6);}
 
-      /* 🌊 Wellen-Logo */
-      .logo-container {
-        display: flex;
-        justify-content: center;
-        margin-top: 2rem;
-        margin-bottom: 1.5rem;
-      }
+    h1{
+      margin:0;
+      font-size: clamp(22px, 4.4vw, 42px);
+      color:var(--accent);
+      letter-spacing: -0.02em;
+      font-weight:700;
+    }
 
-      .wave-logo {
-        width: 120px;
-        height: 120px;
-        fill: none;
-        stroke: var(--accent);
-        stroke-width: 2;
-        filter: drop-shadow(0 0 8px rgba(41, 217, 247, 0.6));
-      }
+    .container{
+      padding: 24px 36px 48px 36px;
+      backdrop-filter: blur(6px);
+    }
 
-      .wave {
-        opacity: 0.8;
-        transform-origin: center;
-        animation: wavePulse 4s ease-in-out infinite;
-      }
+    main{
+      display:grid;
+      grid-template-columns: 1fr;
+      gap:18px;
+      max-width:900px;
+      margin: 0 auto;
+    }
 
-      .wave2 {
-        animation-delay: 1s;
-      }
+    .lead{
+      font-size:1.05rem;
+      color:var(--muted);
+      margin-top:6px;
+    }
 
-      .wave3 {
-        animation-delay: 2s;
-      }
+    section.card{
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:12px;
+      padding:18px;
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.02);
+    }
 
-      @keyframes wavePulse {
-        0% { transform: scale(0.7); opacity: 0; }
-        20% { opacity: 1; }
-        80% { opacity: 0.5; }
-        100% { transform: scale(1.6); opacity: 0; }
-      }
+    .cta{
+      display:inline-block;padding:10px 16px;border-radius:10px;font-weight:600;text-decoration:none;margin-top:10px;background:linear-gradient(90deg,var(--accent),#00c7ff);color:#001;
+      box-shadow:0 8px 20px rgba(0,230,255,0.08);
+    }
 
-      .wave-center {
-        fill: var(--accent);
-        stroke: none;
-        filter: drop-shadow(0 0 12px rgba(41, 217, 247, 0.8));
-        animation: centerPulse 2s ease-in-out infinite;
-      }
+    footer{
+      display:flex;justify-content:space-between;align-items:center;gap:12px;padding:18px 36px;border-top:1px dashed rgba(255,255,255,0.03);
+      color:rgba(230,247,255,0.7);
+      font-size:0.9rem;
+    }
 
-      @keyframes centerPulse {
-        0%, 100% { transform: scale(1); opacity: 1; }
-        50% { transform: scale(1.15); opacity: 0.8; }
-      }
+    a{color:var(--accent)}
 
-      header {
-        text-align: center;
-        padding: 3rem 1rem;
-      }
+    /* responsive tweaks */
+    @media (min-width:900px){
+      main{grid-template-columns: 1fr 360px;align-items:start}
+    }
 
-      header h1 {
-        font-size: 2.5rem;
-        font-weight: 700;
-        text-shadow: 0 0 8px rgba(41, 217, 247, 0.6);
-      }
-
-      header h1 span {
-        color: var(--accent);
-        text-shadow: 0 0 12px rgba(41, 217, 247, 0.8);
-      }
-
-      header p {
-        color: var(--text);
-        opacity: 0.8;
-        margin-top: 0.5rem;
-      }
-
-      main {
-        max-width: 800px;
-        margin: 0 auto;
-        padding: 2rem;
-      }
-
-      section {
-        margin-bottom: 3rem;
-      }
-
-      section h2 {
-        font-size: 1.8rem;
-        color: var(--accent);
-        margin-bottom: 0.8rem;
-        text-shadow: 0 0 8px rgba(41, 217, 247, 0.5);
-      }
-
-      a {
-        color: var(--accent);
-        text-decoration: none;
-      }
-
-      a:hover {
-        text-decoration: underline;
-      }
-
-      footer {
-        text-align: center;
-        padding: 2rem;
-        opacity: 0.7;
-        font-size: 0.9rem;
-      }
-
-      footer pre {
-        font-family: monospace;
-        margin-bottom: 0.5rem;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="background-noise"></div>
-    <div class="flash-overlay"></div>
-
+  </style>
+</head>
+<body>
+  <div class="page">
     <header>
-      <div class="logo-container">
-        <svg class="wave-logo" viewBox="0 0 100 100">
-          <circle class="wave wave1" cx="50" cy="50" r="20" />
-          <circle class="wave wave2" cx="50" cy="50" r="20" />
-          <circle class="wave wave3" cx="50" cy="50" r="20" />
-          <circle class="wave-center" cx="50" cy="50" r="5" />
+      <div class="logo">
+        <!-- simple wave logo (SVG) -->
+        <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Quantenrauschen Logo">
+          <defs>
+            <linearGradient id="g" x1="0" x2="1" y1="0" y2="1">
+              <stop offset="0%" stop-color="#00e6ff"/>
+              <stop offset="100%" stop-color="#00a8d6"/>
+            </linearGradient>
+            <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+              <feGaussianBlur stdDeviation="2.8" result="b"/>
+              <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+            </filter>
+          </defs>
+          <rect width="120" height="120" rx="18" fill="#001524"/>
+          <g transform="translate(10,30)" filter="url(#glow)">
+            <path d="M0 30 C20 0, 40 60, 60 30 C80 0,100 60,120 30" stroke="url(#g)" stroke-width="6" fill="none" stroke-linecap="round"/>
+          </g>
+          <text x="18" y="102" font-family="Inter, Arial" font-size="12" fill="#00e6ff">Q</text>
         </svg>
+        <div>
+          <h1>Quantenrauschen</h1>
+          <div style="font-size:12px;color:rgba(230,247,255,0.6);margin-top:4px">Generator • Kurse • Experimente</div>
+        </div>
       </div>
-      <h1>Willkommen bei <span>Quantenrauschen</span></h1>
-      <p>Die Welt der Quanten – zum Greifen nah.</p>
     </header>
 
-    <main>
-      <section>
-        <h2>Erleben Sie das Rauschen von Quanten zu Hause</h2>
-        <p>
-          Mit unserem brandneuen Quantenrauschen-Generator können Sie das
-          Rauschen von Quanten ganz einfach in Ihrem Wohnzimmer genießen.
-        </p>
+    <div class="container">
+      <main>
+        <section class="card">
+          <p class="lead">Hier bei <strong>Quantenrauschen</strong> sind wir stolz darauf, das ultimative Ziel für alle Liebhaber des Rauschens im Quantenbereich zu sein. Ob Sie sich für das Standardmodell der Teilchenphysik interessieren oder einfach die schönen Geräusche des Universums genießen wollen — hier sind Sie richtig.</p>
+
+          <h3>Quantenrauschen-Generator</h3>
+          <p>Mit unserem einfachen Online-Generator können Sie interaktive Klang- und Visualisierungs-Experimente starten. (Für GitHub Pages: die eigentliche Generator-Logik kann später als JavaScript ergänzt werden.)</p>
+          <a class="cta" href="#generator">Generator starten</a>
+
+          <h3 style="margin-top:14px">Kurse & Workshops</h3>
+          <p>Wir bieten Einsteiger- und Fortgeschrittenenkurse an — sowohl online als auch in Präsenz. Inhalte: Grundlagen der Quantenphysik, Messrauschen verstehen, praktische Experimente.</p>
+        </section>
+
+        <aside class="card">
+          <h4>Kontakt</h4>
+          <p style="margin:6px 0">Mastodon: <a rel="me" href="https://mastodon.social/@blackh0le">@blackh0le</a></p>
+          <p style="margin:6px 0">E-Mail: <em>kontakt(at)quantenrauschen.example</em></p>
+
+          <h4 style="margin-top:10px">Kurz & knapp</h4>
+          <ul style="padding-left:18px;margin:6px 0;color:var(--muted)">
+            <li>Responsive, statische GitHub Page</li>
+            <li>Leicht futuristisches Design, Rauschtextur im Hintergrund</li>
+            <li>Preview-Bild: <code>/preview.jpg</code> (wichtig für social cards)</li>
+          </ul>
+
+          <div style="margin-top:12px;font-size:13px;color:rgba(230,247,255,0.7)">
+            <strong>ASCII</strong>
+            <pre style="margin:6px 0 0 0;color:var(--muted);background:transparent;border:0;padding:0;"> /\_/\  ( o.o )  &gt; ^ &lt;</pre>
+          </div>
+        </aside>
+      </main>
+
+      <section id="generator" class="card" style="margin-top:18px;">
+        <h3>Erleben Sie das Rauschen</h3>
+        <p>Hier wäre der Platz für eine interaktive Demo (WebAudio / Canvas). Für die erste statische Version haben wir Platzhalter-Buttons und kurze Erklärungen eingefügt.</p>
+        <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:8px">
+          <button disabled style="padding:10px 14px;border-radius:10px;border:0;background:rgba(0,230,255,0.08);color:var(--accent);font-weight:600">Generator (Demo)</button>
+          <a class="cta" href="#contact" style="background:transparent;color:var(--accent);box-shadow:none;border:1px solid rgba(0,230,255,0.06)">Kurse ansehen</a>
+        </div>
       </section>
 
-      <section>
-        <h2>Quantenrauschen-Kurse</h2>
-        <p>
-          Lernen Sie von den Besten und erweitern Sie Ihr Wissen über Quanten
-          und Rauschen in unseren Kursen.
-        </p>
-      </section>
-
-      <section>
-        <h2>Kontakt</h2>
-        <p>
-          Bereit, das Rauschen zu erleben?
-          <a
-            href="https://mastodon.social/@blackh0le"
-            target="_blank"
-            rel="noopener noreferrer"
-            >Mastodon</a
-          >
-        </p>
-      </section>
-    </main>
+    </div>
 
     <footer>
-      <pre>
-             /\_/\  
-             ( o.o )  
-            > ^ < </pre>
-      <p>© 2025 Quantenrauschen — Hosted with GitHub Pages</p>
+      <div style="display:flex;align-items:center;gap:12px">
+        <small>© "Quantenrauschen" — eine Demo-Seite. <span style="opacity:0.8">[Product of ChatGPT]</span></small>
+      </div>
+      <div style="text-align:right">
+        <small>{Høstəd with GitHub Pagės}</small>
+      </div>
     </footer>
+  </div>
 
-    <script>
-      // 🌟 Hintergrund Fade-in
-      window.addEventListener("load", () => {
-        document.querySelector(".background-noise").style.opacity = 0.12;
-      });
+  <!--
+    Hinweis zur Bereitstellung auf GitHub Pages (einfach):
+    1) Lege die Datei "index.html" in dein Repository (root) und lade die Datei "preview.jpg" daneben hoch.
+    2) (Optional) Füge eine robots.txt mit folgendem Inhalt hinzu:
 
-      // 🪐 Parallax-Effekt
-      const bg = document.querySelector(".background-noise");
-      document.addEventListener("mousemove", (e) => {
-        const x = (e.clientX / window.innerWidth - 0.5) * 8;
-        const y = (e.clientY / window.innerHeight - 0.5) * 8;
-        bg.style.transform = `translate(${x}px, ${y}px) scale(1.02)`;
-      });
-      document.addEventListener("mouseleave", () => {
-        bg.style.transform = "translate(0, 0) scale(1)";
-      });
+       User-agent: *
+       Allow: /
+       Sitemap: https://yourusername.github.io/sitemap.xml
 
-      // 💨 Seiten-Fade-In
-      document.addEventListener("DOMContentLoaded", () => {
-        document.body.style.opacity = 0;
-        setTimeout(() => {
-          document.body.style.transition = "opacity 1.2s ease";
-          document.body.style.opacity = 1;
-        }, 50);
-      });
-    </script>
-  </body>
+    3) Wenn du ein echtes Generator-Feature möchtest, kann ich dir das JavaScript dafür hinzufügen.
+  -->
+
+</body>
 </html>
