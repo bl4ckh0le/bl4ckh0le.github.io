@@ -35,15 +35,22 @@
       z-index:-2;
     }
 
-    h1,h2 { font-weight:700; text-shadow:0 0 10px #00ffea; margin-bottom:1rem; color:#00ffea; }
+    /* Text direkt auf Hintergrund */
+    h1,h2,p,a,pre,footer {
+      margin:0.5rem 0;
+      padding:0;
+      max-width: none;
+    }
+
+    h1,h2 { font-weight:700; text-shadow:0 0 10px #00ffea; color:#00ffea; }
     h1 { font-size:2.5rem; }
-    h2 { font-size:1.8rem; margin-top:2rem; }
-    p, a, pre, footer { margin-left:auto; margin-right:auto; max-width:800px; }
-    p { margin-bottom:1rem; }
+    h2 { font-size:1.8rem; }
+
     a { color:#00ffea; text-decoration:none; font-weight:bold; }
     a:hover { text-decoration:underline; }
-    pre { font-size:1.5rem; margin:2rem 0; }
-    footer { margin-top:2rem; font-size:0.9rem; color:#888; }
+
+    pre { font-size:1.5rem; margin:1rem 0; }
+    footer { margin-top:1rem; font-size:0.9rem; color:#888; }
   </style>
 </head>
 <body>
@@ -88,7 +95,9 @@
         y: Math.random()*height,
         size: Math.random()*2 + 1,
         speedX: (Math.random()-0.5)*0.5,
-        speedY: (Math.random()-0.5)*0.5
+        speedY: (Math.random()-0.5)*0.5,
+        drift: Math.random()*0.5 + 0.2,
+        driftPhase: Math.random()*Math.PI*2
       });
     }
 
@@ -117,12 +126,17 @@
       const pulseFactor = 0.5 + Math.sin(pulse)*0.5;
 
       particles.forEach(p => {
+        p.driftPhase += 0.01;
+        p.y += Math.sin(p.driftPhase) * p.drift;
+
         let dx = (mouse.x - p.x) * 0.0005;
         let dy = (mouse.y - p.y) * 0.0005;
         p.x += p.speedX + dx;
         p.y += p.speedY + dy;
+
         if(p.x<0)p.x=width; if(p.x>width)p.x=0;
         if(p.y<0)p.y=height; if(p.y>height)p.y=0;
+
         ctx.fillStyle = `rgba(0,255,234,${0.2 + 0.3*pulseFactor})`;
         ctx.beginPath();
         ctx.arc(p.x,p.y,p.size*(0.8+0.4*pulseFactor),0,Math.PI*2);
