@@ -12,7 +12,20 @@
   <style>
     /* Reset */
     * { margin:0; padding:0; box-sizing:border-box; }
-    html, body { height:100%; font-family:'Helvetica Neue', Arial, sans-serif; color:#f0f0f0; overflow-x:hidden; background:#0b0b0b; text-align:center; }
+    html, body {
+      height:100%;
+      font-family:'Helvetica Neue', Arial, sans-serif;
+      color:#f0f0f0;
+      overflow-x:hidden;
+      background:#0b0b0b;
+      text-align:center;
+
+      /* Vertikal zentrieren */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
     /* Hintergrund-Canvas */
     #noiseCanvas {
@@ -23,14 +36,14 @@
     }
 
     h1,h2 { font-weight:700; text-shadow:0 0 10px #00ffea; margin-bottom:1rem; color:#00ffea; }
-    h1 { font-size:2.5rem; margin-top:2rem; }
+    h1 { font-size:2.5rem; }
     h2 { font-size:1.8rem; margin-top:2rem; }
-    p, a, pre, footer { margin-left:auto; margin-right:auto; }
-    p { margin-bottom:1rem; max-width:800px; }
+    p, a, pre, footer { margin-left:auto; margin-right:auto; max-width:800px; }
+    p { margin-bottom:1rem; }
     a { color:#00ffea; text-decoration:none; font-weight:bold; }
     a:hover { text-decoration:underline; }
     pre { font-size:1.5rem; margin:2rem 0; }
-    footer { margin-top:3rem; font-size:0.9rem; color:#888; }
+    footer { margin-top:2rem; font-size:0.9rem; color:#888; }
   </style>
 </head>
 <body>
