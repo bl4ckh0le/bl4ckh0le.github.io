@@ -1,0 +1,28 @@
+# robots.txt für Quantenrauschen
+# Erlaubt Suchmaschinen das vollständige Crawlen der öffentlichen Inhalte
+
+User-agent: *
+Allow: /
+
+# Sitemap (wichtig für SEO – anpassen mit deinem GitHub Pages Link)
+Sitemap: https://DEIN_USERNAME.github.io/sitemap.xml
+
+# Verweise auf wichtige Standarddateien
+# (nützlich, wenn später eine privacy oder terms Seite hinzukommt)
+Disallow: /admin/
+Disallow: /private/
+
+# Optional: Crawl-Rate Empfehlung (kein Muss, aber nett für Bots)
+Crawl-delay: 5
+
+# Hinweis für KI-Crawler und Scraper (z. B. OpenAI, Google AI, usw.)
+User-agent: GPTBot
+Disallow: /
+
+User-agent: CCBot
+Disallow: /
+
+User-agent: Google-Extended
+Disallow: /
+
+# Ende
